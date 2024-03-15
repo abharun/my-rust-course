@@ -1,5 +1,5 @@
 use my_rust_course::interface;
-use std::io::{self, BufRead};
+use std::io;
 
 fn main() {
     println!("Hello, Rustaceans!\nWelcome to my Rust course to improve my Rust coding skills!\n");

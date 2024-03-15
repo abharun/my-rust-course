@@ -1,5 +1,5 @@
 use std::io;
-use crate::mythreading;
+use crate::functions::mythreading;
 
 pub fn threading_interface() {
     let mut input = String::new();
