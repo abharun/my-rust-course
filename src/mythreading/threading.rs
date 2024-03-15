@@ -9,13 +9,13 @@ fn run_new_thread(index: i32, range: i32) -> JoinHandle<()> {
     })
 }
 
-pub fn thread_factory(number: i32) {
+pub fn thread_factory(number: i32, max_range: i32) {
     let mut rng = rand::thread_rng();
 
     let mut threads: Vec<JoinHandle<()>> = vec![];
 
     for index in 1..=number {
-        let range = rng.gen_range(1..=100);
+        let range = rng.gen_range(1..=max_range);
         threads.push(run_new_thread(index, range));
     }
 
