@@ -10,6 +10,7 @@ As a step to learn Rust language, I'm trying to track some code snaps for partic
 
 # Contents
 ### 1. [Simple multi-threading](#simplemultithreading)
+### 2. [Echo user input via channel](#echowithchannel)
 
 # Implementations
 
@@ -31,5 +32,22 @@ Factory #6:39
 Factory #8:37
 Factory #8:38
 Factory #8:39
+... ...
+```
+
+<a id = "echowithchannel"></a>
+
+## Echo user input via channel
+If you input any string, then the funcion would echo the input via channel. You can terminate by inputing `bye`.
+
+Input: Any string you want.
+
+Output:
+```shell
+... ...
+my input
+Your Input: my input
+again input
+Your Input: again input
 ... ...
 ```
