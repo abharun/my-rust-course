@@ -23,13 +23,20 @@ fn main() {
     while let Ok(_) = stdin.read_line(&mut input) {
         let index = input.trim().parse();
         match index.unwrap() {
-            1 => { interface::threading_interface(); },
-            2 => { interface::echo_channel_interface(); }
+            0 => {
+                break;
+            }
+            1 => {
+                interface::threading_interface();
+            }
+            2 => {
+                interface::echo_channel_interface();
+            }
             _ => {
                 println!("Not implemented for the index!");
             }
         };
         input.clear();
-        display_func_seperator();        
+        display_func_seperator();
     }
 }

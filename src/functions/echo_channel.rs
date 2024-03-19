@@ -26,5 +26,4 @@ pub fn echo_with_channel() {
         }
         input.clear();
     }
-    println!("Echo function ended");
 }
