@@ -51,3 +51,5 @@ again input
 Your Input: again input
 ... ...
 ```
+
+If you do not input any string within 10 seconds, it would be automatically terminated.
