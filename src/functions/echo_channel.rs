@@ -1,11 +1,13 @@
-use std::io;
+use tokio::io::{self, AsyncBufReadExt, BufReader};
+use tokio::time::timeout;
 use std::sync::mpsc;
 use std::thread;
+use std::time::Duration;
 
-pub fn echo_with_channel() {
-    let mut input = String::new();
-
+pub async fn echo_with_channel() {
     let stdin = io::stdin();
+    let reader = BufReader::new(stdin);
+    let mut lines = reader.lines();
 
     let (tx, lx) = mpsc::channel::<String>();
 
@@ -18,12 +20,27 @@ pub fn echo_with_channel() {
         }
     });
 
-    while let Ok(_) = stdin.read_line(&mut input) {
-        input = input.trim().to_string();
-        tx.send(input.clone()).unwrap();
-        if input == String::from("bye") {
-            break;
+    loop {
+        let line = lines.next_line();
+        match timeout(Duration::from_secs(10), line).await {
+            Ok(Ok(Some(text))) => {
+                let _ = tx.send(text.clone());
+                if text == String::from("bye") {
+                    break;
+                }
+            }
+            Ok(Ok(None)) => {
+                println!("No more input!");
+                break;
+            }
+            Ok(Err(e)) => {
+                println!("Error read line: {:?}", e.to_string());
+                break;
+            }
+            Err(_) => {
+                println!("No input within 10 seconds");
+                break;
+            }
         }
-        input.clear();
     }
 }

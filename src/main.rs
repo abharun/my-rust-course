@@ -14,7 +14,8 @@ fn display_func_seperator() {
     println!("Input func index:");
 }
 
-fn main() {
+#[tokio::main]
+async fn main() {
     display_header();
 
     let mut stdin = io::stdin();
@@ -30,7 +31,7 @@ fn main() {
                 interface::threading_interface();
             }
             2 => {
-                interface::echo_channel_interface();
+                interface::echo_channel_interface().await;
             }
             _ => {
                 println!("Not implemented for the index!");
