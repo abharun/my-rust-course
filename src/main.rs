@@ -33,6 +33,9 @@ async fn main() {
             2 => {
                 interface::echo_channel_interface().await;
             }
+            3 => {
+                interface::mini_chain::run_mini_chain();
+            }
             _ => {
                 println!("Not implemented for the index!");
             }
