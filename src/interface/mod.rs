@@ -1,5 +1,7 @@
-pub mod threading_input;
+pub mod mythreading;
 pub mod echo_channel;
+pub mod tokio_yield;
 
-pub use threading_input::threading_interface;
+pub use mythreading::threading_interface;
 pub use echo_channel::echo_channel_interface;
+pub use tokio_yield::tokio_yield_interface;
