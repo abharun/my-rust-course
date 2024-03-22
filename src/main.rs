@@ -33,6 +33,9 @@ async fn main() {
             2 => {
                 interface::echo_channel_interface().await;
             }
+            3 => {
+                interface::tokio_yield_interface().await;
+            }
             _ => {
                 println!("Not implemented for the index!");
             }
