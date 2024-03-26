@@ -20,7 +20,7 @@ impl MyThread {
     async fn display_value(&self) -> Result<(), String> {
         sleep(Duration::from_millis(600)).await;
         loop {
-            println!("Thread #{:?} Value={:?}", self.index, self.value);
+            println!("Task #{:?} Value={:?}", self.index, self.value);
             sleep(Duration::from_secs(1)).await;
         }
     }
