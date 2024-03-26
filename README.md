@@ -12,6 +12,7 @@ As a step to learn Rust language, I'm trying to track some code snaps for partic
 ### 1. [Simple multi-threading](#simplemultithreading)
 ### 2. [Echo user input via channel](#echowithchannel)
 ### 3. [Task management with tokio::task::yield_now()](#taskmanagewithyield)
+### 4. [tokio::try_join!() and futures::future::try_join_all()](#taskmanagetryjoinall)
 
 # Implementations
 
@@ -76,3 +77,36 @@ Task 1 timestamp is #3
 ```
 
 You can see that two tasks are working simultaneously.
+
+<a id = "taskmanagetryjoinall"></a>
+
+## Task management with `futures::future::try_join_all()` and `tokio::try_join!()`
+By joining `futures::future::try_join_all()` and `tokio::try_join!()`, you can manage several tasks concurrently.
+
+It's important to understand that these functions does NOT create new thread for tasks. It runs the tasks concurrently on the same threads and effectively schedule the asynchronous tasks.
+
+`Input`: Number of threads
+
+`Output`:
+```shell
+From extra thread!
+Task #0 Value=17
+Task #1 Value=37
+Task #2 Value=3
+Task #3 Value=19
+Task #4 Value=27
+Task #0 Value=17
+Task #1 Value=37
+Task #2 Value=3
+Task #3 Value=19
+Task #4 Value=27
+From extra thread!
+Task #0 Value=17
+Task #1 Value=37
+Task #2 Value=3
+Task #3 Value=19
+Task #4 Value=27
+... ...
+```
+
+You can see that two tasks are working concurrently.

@@ -18,10 +18,9 @@ fn display_func_seperator() {
 async fn main() {
     display_header();
 
-    let mut stdin = io::stdin();
     let mut input = String::new();
 
-    while let Ok(_) = stdin.read_line(&mut input) {
+    while let Ok(_) = io::stdin().read_line(&mut input) {
         let index = input.trim().parse();
         match index.unwrap() {
             0 => {
@@ -35,6 +34,9 @@ async fn main() {
             }
             3 => {
                 interface::tokio_yield_interface().await;
+            }
+            4 => {
+                interface::try_join_and_join_all_interface().await;
             }
             _ => {
                 println!("Not implemented for the index!");
