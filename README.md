@@ -125,9 +125,10 @@ e.g. if the `difficulty = 5`, then the hashed value should be lower that 2^(4 * 
 
 `Output`:
 ```shell
-Text: "Hello, world\n"
-Nonce: 386
-HashValue: "00948bd468556e0bc3cae3fac7dd6a527e7fbb28bba66060b71c8118b50063ee"
+Text: "hello, world\n"
+Difficulty: 3
+Nonce: 1805
+HashValue: "00035bfb799b0e28016c13c007633173c047c4d100054218d598119b78454ea4"
 ... ...
 ```
 
