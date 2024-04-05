@@ -18,5 +18,5 @@ pub fn hash_with_diff_interface() {
     let difficulty: i32 = input.trim().parse().expect("Please enter a valid number.");
 
     let (hash_value, nonce) = calculate_hash(text.clone(), difficulty);
-    println!("Text: {:?}\nNonce: {:?}\nHashValue: {:?}", text, nonce, hash_value);
+    println!("Text: {:?}\nDifficulty: {:?}\nNonce: {:?}\nHashValue: {:?}", text, difficulty, nonce, hash_value);
 }
