@@ -13,6 +13,7 @@ As a step to learn Rust language, I'm trying to track some code snaps for partic
 ### 2. [Echo user input via channel](#echowithchannel)
 ### 3. [Task management with tokio::task::yield_now()](#taskmanagewithyield)
 ### 4. [tokio::try_join!() and futures::future::try_join_all()](#taskmanagetryjoinall)
+### 5. [Hash text with under difficulty](#texthashwithdifficulty)
 
 # Implementations
 
@@ -106,6 +107,28 @@ Task #1 Value=37
 Task #2 Value=3
 Task #3 Value=19
 Task #4 Value=27
+... ...
+```
+
+You can see that two tasks are working concurrently.
+
+<a id = "texthashwithdifficulty"></a>
+
+## Hashing given text under difficulty
+Hash inputed text with `sha3_256` algorithm.
+
+Here, introduced `difficulty` concept, meaning that the hashed value should be lower than particular value.
+
+e.g. if the `difficulty = 5`, then the hashed value should be lower that 2^(4 * (63 - 5) + 1). So the first 5 chars of hashed value should be `"00000"`.
+
+`Input`: Text to hash & Difficulty
+
+`Output`:
+```shell
+Text: "hello, world\n"
+Difficulty: 3
+Nonce: 1805
+HashValue: "00035bfb799b0e28016c13c007633173c047c4d100054218d598119b78454ea4"
 ... ...
 ```
 
