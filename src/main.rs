@@ -38,6 +38,9 @@ async fn main() {
             4 => {
                 interface::try_join_and_join_all_interface().await;
             }
+            5 => {
+                interface::hash_with_diff_interface();
+            }
             _ => {
                 println!("Not implemented for the index!");
             }
