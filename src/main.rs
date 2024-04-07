@@ -41,6 +41,9 @@ async fn main() {
             5 => {
                 interface::hash_with_diff_interface();
             }
+            6 => {
+                interface::utxo_tx_proc_interface();
+            }
             _ => {
                 println!("Not implemented for the index!");
             }
