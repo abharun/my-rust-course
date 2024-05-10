@@ -14,6 +14,7 @@ As a step to learn Rust language, I'm trying to track some code snaps for partic
 ### 3. [Task management with tokio::task::yield_now()](#taskmanagewithyield)
 ### 4. [tokio::try_join!() and futures::future::try_join_all()](#taskmanagetryjoinall)
 ### 5. [Hash text with under difficulty](#texthashwithdifficulty)
+### 6. [Example UTXO processing](#exputxoprocessing)
 
 # Implementations
 
@@ -133,3 +134,34 @@ HashValue: "00035bfb799b0e28016c13c007633173c047c4d100054218d598119b78454ea4"
 ```
 
 You can see that two tasks are working concurrently.
+
+
+<a id = "exputxoprocessing"></a>
+
+## Example UTXO processing via transactions.
+In POW network, when a transactions is triggered, the UTXO is updated.
+
+The remain amount of account is calculated from this UTXO.
+
+`Input`:
+to Transfer: `<from> <to> <amount>`
+to Deposit: `<account> <amount>`
+to Display UTXO: `disp`
+
+`Output`:
+```shell
+a 100
+b 100
+disp
+"b"
+[100]
+"a"
+[100]
+a b 50
+disp
+"b"
+[100, 50]
+"a"
+[50]
+... ...
+```
