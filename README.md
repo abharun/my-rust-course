@@ -15,6 +15,7 @@ As a step to learn Rust language, I'm trying to track some code snaps for partic
 ### 4. [tokio::try_join!() and futures::future::try_join_all()](#taskmanagetryjoinall)
 ### 5. [Hash text with under difficulty](#texthashwithdifficulty)
 ### 6. [Example UTXO processing](#exputxoprocessing)
+### 7. [Split text with delimiter](#splittextdelimiter)
 
 # Implementations
 
@@ -120,7 +121,7 @@ Hash inputed text with `sha3_256` algorithm.
 
 Here, introduced `difficulty` concept, meaning that the hashed value should be lower than particular value.
 
-e.g. if the `difficulty = 5`, then the hashed value should be lower that 2^(4 * (63 - 5) + 1). So the first 5 chars of hashed value should be `"00000"`.
+e.g. if the `difficulty = 5`, then the hashed value should be lower than 2^(4 * (63 - 5) + 1). So the first 5 chars of hashed value should be `"00000"`.
 
 `Input`: Text to hash & Difficulty
 
@@ -132,8 +133,6 @@ Nonce: 1805
 HashValue: "00035bfb799b0e28016c13c007633173c047c4d100054218d598119b78454ea4"
 ... ...
 ```
-
-You can see that two tasks are working concurrently.
 
 
 <a id = "exputxoprocessing"></a>
@@ -164,4 +163,32 @@ disp
 "a"
 [50]
 ... ...
+```
+
+<a id = "splittextdelimiter"></a>
+
+## Split the text with given delimiter.
+Split the text with delimiter. Here the ownership and lifetime for string values is the key point.
+
+Whenever you deliver `String` or `&str` variable, it's important that determine the object's lifetime with the strings, like this:
+```rust
+pub struct Split<'a, 'b> {
+    input: &'a str,
+    delimiter: &'b str,
+    current_position: usize,
+}
+```
+
+`Input`: String to split and delimiter
+
+`Output`:
+```shell
+Enter the string to split:
+a<>b<>c<>d
+Enter the delimiter:
+<>
+"a"
+"b"
+"c"
+"d"
 ```
