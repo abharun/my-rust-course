@@ -44,6 +44,9 @@ async fn main() {
             6 => {
                 interface::utxo_tx_proc_interface();
             }
+            7 => {
+                interface::string_splitter_interface();
+            }
             _ => {
                 println!("Not implemented for the index!");
             }
