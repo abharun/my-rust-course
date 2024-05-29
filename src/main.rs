@@ -47,6 +47,9 @@ async fn main() {
             7 => {
                 interface::string_splitter_interface();
             }
+            8 => {
+                interface::sort_tree_interface();
+            }
             _ => {
                 println!("Not implemented for the index!");
             }
