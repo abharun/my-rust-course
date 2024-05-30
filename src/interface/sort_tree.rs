@@ -1,4 +1,5 @@
 use std::io::{self, BufRead, BufReader};
+use crate::functions::sort_tree::run_cli;
 
 pub fn sort_tree_interface() {
     let stdin = io::stdin();
@@ -13,7 +14,7 @@ pub fn sort_tree_interface() {
                 if txt == "exit" {
                     break;
                 }
-                println!("Your Input: {:?}", txt);
+                run_cli(txt);
             }
             Some(Err(err)) => {
                 println!("Error Input: {:?}", err);
