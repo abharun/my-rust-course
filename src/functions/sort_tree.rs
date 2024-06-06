@@ -1,4 +1,5 @@
-use std::path::Display;
+use std::sync::Mutex;
+use once_cell::sync::Lazy;
 
 use nom::{
     branch::alt,
@@ -8,6 +9,7 @@ use nom::{
     IResult,
 };
 
+#[derive(PartialEq)]
 enum DisplayOrder {
     Ascend,
     Descend,
@@ -18,7 +20,7 @@ enum CommandType {
     Display(DisplayOrder),
 }
 
-#[derive(PartialEq)]
+#[derive(PartialEq, Clone)]
 struct ValueNode {
     value: i32,
     left_node: Option<Box<ValueNode>>,
@@ -35,6 +37,7 @@ impl ValueNode {
     }
 }
 
+#[derive(Clone)]
 struct SortTree {
     root: Option<Box<ValueNode>>,
 }
@@ -46,8 +49,41 @@ impl Default for SortTree {
 }
 
 impl SortTree {
-    fn insert(self, value: i32) {}
-    fn display(self, order: DisplayOrder) {}
+    fn insert(mut self, value: i32) {
+        let mut current = &mut self.root;
+
+        loop {
+            match current {
+                None => {
+                    *current = Some(Box::new(ValueNode::new(value)));
+                    break;
+                }
+                Some(ref mut node) => {
+                    if value < node.value {
+                        current = &mut node.left_node;
+                    } else {
+                        current = &mut node.right_node;
+                    }
+                }
+            }
+        }
+    }
+
+    fn display(node: Option<Box<ValueNode>>, order: DisplayOrder) {
+        if node == None {
+            return;
+        }
+
+        if order == DisplayOrder::Ascend {
+            Self::display(node.clone().unwrap().left_node, DisplayOrder::Ascend);
+            println!("{:?}", node.clone().unwrap().value);
+            Self::display(node.clone().unwrap().right_node, DisplayOrder::Ascend);
+        } else {
+            Self::display(node.clone().unwrap().right_node, DisplayOrder::Descend);
+            println!("{:?}", node.clone().unwrap().value);
+            Self::display(node.clone().unwrap().left_node, DisplayOrder::Descend);
+        }
+    }
 }
 
 pub fn run_cli(command: String) {

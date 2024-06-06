@@ -335,6 +335,7 @@ dependencies = [
  "async-channel",
  "futures",
  "nom",
+ "once_cell",
  "rand",
  "sha3",
  "tokio",
