@@ -1,3 +1,6 @@
+use once_cell::sync::Lazy;
+use std::sync::Mutex;
+
 use nom::{
     branch::alt,
     bytes::complete::{tag, take_while1},
@@ -83,8 +86,11 @@ impl SortTree {
     }
 }
 
-pub fn run_cli(tree: &mut SortTree, command: String) {
+static TREE: Lazy<Mutex<SortTree>> = Lazy::new(|| Mutex::new(SortTree::default()));
+
+pub fn run_cli(command: String) {
     if let Ok((_, c)) = parse_cli(&command) {
+        let mut tree = TREE.lock().unwrap();
         match c {
             CommandType::Insert(value) => {
                 tree.insert(value);
