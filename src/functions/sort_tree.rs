@@ -1,6 +1,3 @@
-use std::sync::Mutex;
-use once_cell::sync::Lazy;
-
 use nom::{
     branch::alt,
     bytes::complete::{tag, take_while1},
@@ -20,8 +17,8 @@ enum CommandType {
     Display(DisplayOrder),
 }
 
-#[derive(PartialEq, Clone)]
-struct ValueNode {
+#[derive(PartialEq, Clone, Debug)]
+pub struct ValueNode {
     value: i32,
     left_node: Option<Box<ValueNode>>,
     right_node: Option<Box<ValueNode>>,
@@ -37,8 +34,8 @@ impl ValueNode {
     }
 }
 
-#[derive(Clone)]
-struct SortTree {
+#[derive(Clone, Debug)]
+pub struct SortTree {
     root: Option<Box<ValueNode>>,
 }
 
@@ -49,7 +46,7 @@ impl Default for SortTree {
 }
 
 impl SortTree {
-    fn insert(mut self, value: i32) {
+    fn insert(&mut self, value: i32) {
         let mut current = &mut self.root;
 
         loop {
@@ -86,17 +83,17 @@ impl SortTree {
     }
 }
 
-pub fn run_cli(command: String) {
+pub fn run_cli(tree: &mut SortTree, command: String) {
     if let Ok((_, c)) = parse_cli(&command) {
         match c {
             CommandType::Insert(value) => {
-                println!("Insert Value: {value}");
+                tree.insert(value);
             }
             CommandType::Display(DisplayOrder::Ascend) => {
-                println!("Ascend Sort");
+                SortTree::display(tree.root.clone(), DisplayOrder::Ascend);
             }
             CommandType::Display(DisplayOrder::Descend) => {
-                println!("Descend Sort");
+                SortTree::display(tree.root.clone(), DisplayOrder::Descend);
             }
         }
     } else {
