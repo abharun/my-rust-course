@@ -1,13 +1,11 @@
 use std::io::{self, BufRead, BufReader};
-use crate::functions::sort_tree::{run_cli, SortTree};
+use crate::functions::sort_tree::run_cli;
 
 pub fn sort_tree_interface() {
     let stdin = io::stdin();
     let reader = BufReader::new(stdin);
 
     let mut lines = reader.lines();
-
-    let mut tree = SortTree::default();
 
     loop {
         let line = lines.next();
@@ -16,7 +14,7 @@ pub fn sort_tree_interface() {
                 if txt == "exit" {
                     break;
                 }
-                run_cli(&mut tree, txt);
+                run_cli(txt);
             }
             Some(Err(err)) => {
                 println!("Error Input: {:?}", err);
